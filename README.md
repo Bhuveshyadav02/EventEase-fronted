@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +69,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# EventEase-fronted
+EventEase is an online platform for booking halls for various events. This app allows users to view a list of available halls, book a hall for a specific date and time, and submit their booking requests for approval. Admin users can manage hall listings, approve or reject booking requests, and view booking details.
+>>>>>>> 176b25836a003b04786e1a96295348a528accf50
