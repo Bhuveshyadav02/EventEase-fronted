@@ -16,6 +16,7 @@ import About from './About';
 import Footer from './components/Footer.js';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import ErrorPage from './components/ErrorPage.js';
 import 'react-toastify/dist/ReactToastify.css';
 import {  reducers } from './reducers/authreducers';
 import axios from 'axios';
@@ -47,7 +48,7 @@ function App() {
       <Route path='/profile' element={<About/>}/>
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/calendar' element={<CalendarView/>} />
-         <Route path='/signup' element={<Signup />} />
+         <Route path='signup' element={<Signup />} />
          <Route path="/login" element={<Login />} />
          <Route path='/logout'  element={<Logout/>}/>
          <Route path='/events' element={<Events/>} />
@@ -57,12 +58,12 @@ function App() {
   
   
   <Route  exact path='/bookingsEdit/:bookingId' element={state.userType==='admin'?<BookingUpdateForm/>:state.userType==='hod'?<BookingUpdateForm/>:<Unauthorized/>}/>
-  <Route path='hallForm' element={state.userType==='admin'?<HallForm/>:<Unauthorized/>} />
+  <Route path='/hallForm' element={state.userType==='admin'?<HallForm/>:<Unauthorized/>} />
         <Route path='/bookings' element={state.userType==='admin'?<BookingsAdmin/>:state.userType==='hod'?<BookingsHod/> :state.userType==='faculty' ?<BookingFaculty/> :<Unauthorized/>}/>
         <Route exact path='/halls/bookhalls/:hallid/:hallname' element={<Bookingforms/>} />
         <Route path='/bookingsView/:id' element={<BookingsView/>}/>
         
-       
+        <Route path="/*" element={<ErrorPage />} />
        
         
         

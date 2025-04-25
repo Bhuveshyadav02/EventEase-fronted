@@ -57,7 +57,7 @@ const BookingsAdmin = () => {
   // };
   const userContact = async () => {
     try { const token=localStorage.getItem('jwttoken')
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getdata`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/getdata`, {
        // withCredentials: true, // include credentials in the request
         headers: {
           "Content-Type": "application/json",
@@ -153,7 +153,7 @@ const BookingsAdmin = () => {
   useEffect(() => {
 
     getBookingData();
-
+ 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -175,7 +175,7 @@ const BookingsAdmin = () => {
     try {
       const token=localStorage.getItem('jwttoken')
       const response = await axios.put(
-        `$${process.env.REACT_APP_API_BASE_URL}/bookingsEdit/${bookingId}`,
+        `${process.env.REACT_APP_API_BASE_URL}/bookingsEdit/${bookingId}`,
         {
           isApproved: isApproved,
           rejectionReason:

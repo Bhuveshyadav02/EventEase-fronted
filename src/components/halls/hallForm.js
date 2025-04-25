@@ -22,8 +22,9 @@ const HallForm = () => {
 
   const userContact = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getdata`, {
-       // withCredentials: true, // include credentials in the request
+      console.log("getting current user info")
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/getdata`, {
+        withCredentials: true, // include credentials in the request
         headers: {
           "Content-Type": "application/json",
           "Authorization":`Bearer ${token}`
@@ -33,7 +34,7 @@ const HallForm = () => {
       const data = response.data;
       setHallCreater(data.email)
 
-      // console.log(data.email);
+       console.log(data);
 
       if(data.emailVerified){
         setEmailVerified(true)
@@ -83,7 +84,7 @@ const HallForm = () => {
     // setIsLoading(true)
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/createhall`,
+        `${process.env.REACT_APP_API_BASE_URL}/createhall`,
         {
           name,location,capacity,amenities,description ,hallCreater
         },

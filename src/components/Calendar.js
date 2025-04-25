@@ -44,13 +44,16 @@ export const CalendarView = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/events`, {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        });
-        console.log('Fetched events:', response.data.bookings);
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_BASE_URL}/events`,
+          {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log("Fetched events:", response.data.bookings);
         setEvents(response.data.bookings);
       } catch (error) {
         console.error("Error fetching events:", error);
@@ -64,7 +67,9 @@ export const CalendarView = () => {
   useEffect(() => {
     const fetchHallNames = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/gethalls`);
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_BASE_URL}/gethalls`
+        );
         console.log("Type of halls", response.data.halls);
         setHallNames(response.data.halls); // Assuming halls are retrieved as an array of objects with 'name' property
       } catch (error) {
@@ -90,9 +95,10 @@ export const CalendarView = () => {
     return selectedHalls.includes(hallName);
   };
 
-  const filteredEvents = selectedHalls.length > 0
-    ? events.filter((event) => selectedHalls.includes(event.bookedHallName))
-    : events;
+  const filteredEvents =
+    selectedHalls.length > 0
+      ? events.filter((event) => selectedHalls.includes(event.bookedHallName))
+      : events;
 
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
@@ -111,9 +117,15 @@ export const CalendarView = () => {
 
   let selectedDayMeetings = Array.isArray(filteredEvents)
     ? filteredEvents.filter((booking) => {
-        const eventStartDate = booking.eventStartDate ? parseISO(booking.eventStartDate) : null;
-        const eventEndDate = booking.eventEndDate ? parseISO(booking.eventEndDate) : null;
-        const eventDate = booking.eventDate ? parseISO(booking.eventDate) : null;
+        const eventStartDate = booking.eventStartDate
+          ? parseISO(booking.eventStartDate)
+          : null;
+        const eventEndDate = booking.eventEndDate
+          ? parseISO(booking.eventEndDate)
+          : null;
+        const eventDate = booking.eventDate
+          ? parseISO(booking.eventDate)
+          : null;
         const eventDateType = booking.eventDateType;
 
         if (eventDateType === "full" || eventDateType === "half") {
@@ -125,7 +137,8 @@ export const CalendarView = () => {
             (isWithinInterval(selectedDay, {
               start: eventStartDate,
               end: eventEndDate,
-            }) || isSameDay(eventStartDate, selectedDay))
+            }) ||
+              isSameDay(eventStartDate, selectedDay))
           );
         }
 
@@ -161,7 +174,11 @@ export const CalendarView = () => {
                 By Hall Name
               </h2>
               <button
-                className={`py-2 px-8 rounded-full mb-4 mx-4 focus:outline-none ${selectedHalls.length === 0 ? "bg-indigo-100 text-indigo-800" : "bg-white text-gray-800 hover:bg-gray-100"}`}
+                className={`py-2 px-8 rounded-full mb-4 mx-4 focus:outline-none ${
+                  selectedHalls.length === 0
+                    ? "bg-indigo-100 text-indigo-800"
+                    : "bg-white text-gray-800 hover:bg-gray-100"
+                }`}
                 onClick={() => setSelectedHalls([])}
               >
                 All
@@ -169,7 +186,11 @@ export const CalendarView = () => {
               {hallNames.map((hall) => (
                 <button
                   key={hall.id}
-                  className={`py-2 px-8 rounded-full mb-4 mx-4 focus:outline-none ${isHallSelected(hall.name) ? "bg-indigo-100 text-indigo-800" : "bg-white text-gray-800 hover:bg-gray-100"}`}
+                  className={`py-2 px-8 rounded-full mb-4 mx-4 focus:outline-none ${
+                    isHallSelected(hall.name)
+                      ? "bg-indigo-100 text-indigo-800"
+                      : "bg-white text-gray-800 hover:bg-gray-100"
+                  }`}
                   onClick={() => handleHallSelection(hall.name)}
                 >
                   {hall.name}
@@ -253,19 +274,33 @@ export const CalendarView = () => {
                     <div className="flex mx-auto items-center">
                       {Array.isArray(filteredEvents) &&
                         filteredEvents.map((booking) => {
-                          const eventStartDate = booking.eventStartDate ? parseISO(booking.eventStartDate) : null;
-                          const eventEndDate = booking.eventEndDate ? parseISO(booking.eventEndDate) : null;
-                          const eventDate = booking.eventDate ? parseISO(booking.eventDate) : null;
+                          const eventStartDate = booking.eventStartDate
+                            ? parseISO(booking.eventStartDate)
+                            : null;
+                          const eventEndDate = booking.eventEndDate
+                            ? parseISO(booking.eventEndDate)
+                            : null;
+                          const eventDate = booking.eventDate
+                            ? parseISO(booking.eventDate)
+                            : null;
                           const eventDateType = booking.eventDateType;
 
-                          if (eventDateType === "full" && eventDate && isSameDay(eventDate, day)) {
+                          if (
+                            eventDateType === "full" &&
+                            eventDate &&
+                            isSameDay(eventDate, day)
+                          ) {
                             return (
                               <div
                                 key={booking.id}
                                 className="w-2 mx-auto flex items-center h-2 mt-.5 rounded-full bg-blue-600"
                               ></div>
                             );
-                          } else if (eventDateType === "half" && eventDate && isSameDay(eventDate, day)) {
+                          } else if (
+                            eventDateType === "half" &&
+                            eventDate &&
+                            isSameDay(eventDate, day)
+                          ) {
                             return (
                               <div
                                 key={booking.id}
@@ -279,7 +314,8 @@ export const CalendarView = () => {
                             (isWithinInterval(day, {
                               start: eventStartDate,
                               end: eventEndDate,
-                            }) || isSameDay(eventStartDate, day))
+                            }) ||
+                              isSameDay(eventStartDate, day))
                           ) {
                             return (
                               <div
@@ -320,11 +356,36 @@ export const CalendarView = () => {
     </div>
   );
 };
+function formatTime(eventDate, time) {
+  // Extract time from the original `startTime` or `endTime`
+  let timeObj = new Date(time);
+  if (isNaN(timeObj.getTime())) return "Invalid Time"; // Handle invalid cases
 
+  // Extract hours and minutes in UTC
+  let hours = timeObj.getUTCHours();
+  let minutes = timeObj.getUTCMinutes();
+
+  // Create a new date using eventDate and extracted time
+  let eventDateObj = new Date(eventDate);
+  eventDateObj.setUTCHours(hours, minutes, 0, 0); // Set correct time on the event date
+
+  // Convert to local time (IST)
+  let localDate = new Date(
+    eventDateObj.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+
+  // Format in 24-hour format
+  let localHours = localDate.getHours();
+  let localMinutes = localDate.getMinutes();
+
+  return `${String(localHours).padStart(2, "0")}:${String(
+    localMinutes
+  ).padStart(2, "0")}`;
+}
 function Meeting({ meeting }) {
-    console.log({meeting})
-  let startDateTime = parseISO(meeting.eventDate);
-  let endDateTime = parseISO(meeting.eventEndDate);
+  console.log({ meeting });
+  let startDateTime = parseISO(meeting.startTime);
+  let endDateTime = parseISO(meeting.endTime);
 
   return (
     <li className="flex items-center space-x-4">
@@ -334,12 +395,15 @@ function Meeting({ meeting }) {
         className="flex-none w-10 h-10 rounded-full"
       />
       <div className="flex-auto">
-        <h3 className="font-semibold text-gray-900">{meeting.bookedHallName}</h3>
+        <h3 className="font-semibold text-gray-900">
+          {meeting.bookedHallName}
+        </h3>
         <dl className="mt-0.5 flex flex-col text-gray-500">
           <div>
             <dt className="sr-only">Date</dt>
             <dd>
-              {format(startDateTime, "h:mm a")} - {format(endDateTime, "h:mm a")}
+              {format(startDateTime, "h:mm a")} -{" "}
+              {format(endDateTime, "h:mm a")}
             </dd>
           </div>
           <div className="mt-1 flex items-center">

@@ -18,7 +18,7 @@ const HallsAdmin = () => {
 
   const callAboutPage = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/about`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/about`, {
        // withCredentials: true, 
         headers: {
           Accept: "application/json",
@@ -52,7 +52,7 @@ const HallsAdmin = () => {
 
   const getHallsData = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/gethalls`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/gethalls`, {
         //withCredentials: true, // include credentials in the request
         headers: {
           Accept: "application/json",
@@ -91,7 +91,7 @@ const HallsAdmin = () => {
 
     try {
       const response = await axios.delete (
-        `${process.env.REACT_APP_SERVER_URL}/halls/${hallId}`,
+        `${process.env.REACT_APP_API_BASE_URL}/halls/${hallId}`,
 
         {
          // withCredentials: true, // To include credentials in the request

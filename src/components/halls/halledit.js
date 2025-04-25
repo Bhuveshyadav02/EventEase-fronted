@@ -21,7 +21,7 @@ const HallsEdit = () => {
   const getHallsData = async () => {
     try {
       console.log("Halledit",hallId)
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/gethalls/${hallId}`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/gethalls/${hallId}`, {
        // withCredentials: true, // include credentials in the request
         headers: {
           Accept: "application/json",
@@ -65,7 +65,7 @@ const HallsEdit = () => {
 
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_SERVER_URL}/halls/${hallId}`,
+        `${process.env.REACT_APP_API_BASE_URL}/halls/${hallId}`,
         {
           name,location,capacity,amenities,description 
         },
